@@ -23,8 +23,18 @@ class Empleado(models.Model):
     cargo = models.CharField(choices=cargos, max_length=10, default="tapcr")
     celular = models.CharField(max_length=20)
     direccion = models.CharField(max_length=50)
-    salario = models.DecimalField()
+    salario = models.DecimalField(decimal_places=2, max_digits=10)
     edad = models.IntegerField()
     fecha_nacimiento = models.DateField()
     tareas_realizadas = models.IntegerField()
+    
+class Producto(models.Model):
+    nombre = models.CharField(max_length=100)
+    categoria = models.CharField(max_length=50)
+    cantidad = models.IntegerField()
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    descripcion = models.CharField(max_length=1000)
+    codigo_producto = models.IntegerField()
+    
+    
     
