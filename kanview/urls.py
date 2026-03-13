@@ -20,5 +20,7 @@ from kanvieww import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.inicio, name="inicio")
+    path('', views.inicio, name="inicio"),
+    path('clientes/', views.seccion_clientes, name='clientes')
 ]
+
