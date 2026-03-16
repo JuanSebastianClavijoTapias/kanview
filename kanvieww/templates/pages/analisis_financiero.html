@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="content-table">
+  <table class="table" border="1" width="80%">
+    <tr>
+      <th>ID</th>
+      <th>Gastos</th>
+      <th>Fuentes de ingresos</th>
+      <th>Productos vendidos</th>
+      <th>ID administrador</th>
+    </tr>
+    {% for i in datos %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.gastos }}</td>
+      <td>{{ i.fuentes_ingresos }}</td>
+      <td>{{ i.productos_vendidos }}</td>
+      <td>{{ i.id_administrador_id }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

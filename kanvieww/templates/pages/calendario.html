@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="content-table">
+  <table class="table" border="1" width="80%">
+    <tr>
+      <th>ID</th>
+      <th>Fecha</th>
+      <th>Anio</th>
+      <th>Mes</th>
+      <th>Nombre mes</th>
+      <th>Dia</th>
+      <th>Nombre dia</th>
+      <th>ID pedido</th>
+    </tr>
+    {% for i in datos %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.fecha }}</td>
+      <td>{{ i.año }}</td>
+      <td>{{ i.mes }}</td>
+      <td>{{ i.nombre_mes }}</td>
+      <td>{{ i.dia }}</td>
+      <td>{{ i.nombre_dia }}</td>
+      <td>{{ i.id_pedido_id }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

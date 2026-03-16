@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="content-table">
+  <table class="table" border="1" width="80%">
+    <tr>
+      <th>ID</th>
+      <th>Documento</th>
+      <th>Nombre</th>
+      <th>Cargo</th>
+      <th>Celular</th>
+      <th>Direccion</th>
+      <th>Salario</th>
+      <th>Edad</th>
+      <th>Fecha de nacimiento</th>
+      <th>Tareas realizadas</th>
+    </tr>
+    {% for i in datos %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.documento }}</td>
+      <td>{{ i.nombre }}</td>
+      <td>{{ i.cargo }}</td>
+      <td>{{ i.celular }}</td>
+      <td>{{ i.direccion }}</td>
+      <td>{{ i.salario }}</td>
+      <td>{{ i.edad }}</td>
+      <td>{{ i.fecha_nacimiento }}</td>
+      <td>{{ i.tareas_realizadas }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
