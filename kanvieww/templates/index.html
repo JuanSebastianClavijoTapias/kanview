@@ -15,6 +15,12 @@
       </div>
       <ul class="nav-links">
         <li>
+          <a href="{% url 'inicio' %}">
+            <i class="bx bx-home"></i>
+            <span class="link_name">Inicio</span>
+          </a>
+        </li>
+        <li>
           <a href="{% url 'clientes' %}">
             <i class="bx bx-user"></i>
             <span class="link_name">Clientes</span>
@@ -98,9 +104,51 @@
         <i class="bx bx-menu"></i>
       </div>
       <div class="main-content">
+
+        <h1 style="display: flex;
+        justify-content: center; 
+        font-size: 90px;
+        margin-top: 22px;
+        margin-bottom: 15px;
+        color: rgb(212, 212, 255);">
+        Visualizacion de registros KanView
+      </h1>
         {% block content %}
         {% endblock%}
       </div>
+      {% if request.resolver_match.url_name == 'inicio' %}
+      <div class="home-carousel" data-carousel>
+        <div class="carousel-copy">
+          <h2>fotos de kanview</h2>
+        </div>
+        <div class="carousel-shell">
+          <button class="carousel-control prev" type="button" aria-label="Imagen anterior" data-carousel-prev>
+            <i class="bx bx-chevron-left"></i>
+          </button>
+          <div class="carousel-track">
+            <figure class="carousel-slide active">
+              <img src="{% static 'img/clavijo.jpeg' %}" alt="Imagen Clavijo">
+            </figure>
+            <figure class="carousel-slide">
+              <img src="{% static 'img/kan.jpeg' %}" alt="Imagen KanView">
+            </figure>
+            <figure class="carousel-slide">
+              <img src="{% static 'img/samuel.jpeg' %}" alt="Imagen Samuel">
+            </figure>
+            <figure class="carousel-slide">
+              <img src="{% static 'img/teo.jpeg' %}" alt="Imagen Teo">
+            </figure>
+            <figure class="carousel-slide">
+              <img src="{% static 'img/teo2.jpeg' %}" alt="Imagen Teo 2">
+            </figure>
+          </div>
+          <button class="carousel-control next" type="button" aria-label="Siguiente imagen" data-carousel-next>
+            <i class="bx bx-chevron-right"></i>
+          </button>
+        </div>
+        <div class="carousel-dots" aria-label="Selector de imagen"></div>
+      </div>
+      {% endif %}
     </section>
     <script>
       let arrow = document.querySelectorAll(".arrow");
@@ -116,6 +164,61 @@
       sidebarBtn.addEventListener("click", () => {
         sidebar.classList.toggle("close");
       });
+
+      const carousel = document.querySelector("[data-carousel]");
+      if (carousel) {
+        const slides = Array.from(carousel.querySelectorAll(".carousel-slide"));
+        const dotsContainer = carousel.querySelector(".carousel-dots");
+        const prevButton = carousel.querySelector("[data-carousel-prev]");
+        const nextButton = carousel.querySelector("[data-carousel-next]");
+        let activeIndex = 0;
+        let autoplayId;
+
+        const dots = slides.map((_, index) => {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "carousel-dot";
+          dot.setAttribute("aria-label", `Ir a la imagen ${index + 1}`);
+          dot.addEventListener("click", () => {
+            updateCarousel(index);
+            restartAutoplay();
+          });
+          dotsContainer.appendChild(dot);
+          return dot;
+        });
+
+        function updateCarousel(index) {
+          activeIndex = (index + slides.length) % slides.length;
+
+          slides.forEach((slide, slideIndex) => {
+            slide.classList.toggle("active", slideIndex === activeIndex);
+          });
+
+          dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle("active", dotIndex === activeIndex);
+          });
+        }
+
+        function restartAutoplay() {
+          window.clearInterval(autoplayId);
+          autoplayId = window.setInterval(() => {
+            updateCarousel(activeIndex + 1);
+          }, 4000);
+        }
+
+        prevButton.addEventListener("click", () => {
+          updateCarousel(activeIndex - 1);
+          restartAutoplay();
+        });
+
+        nextButton.addEventListener("click", () => {
+          updateCarousel(activeIndex + 1);
+          restartAutoplay();
+        });
+
+        updateCarousel(0);
+        restartAutoplay();
+      }
     </script>
     
 </body>
